@@ -4,15 +4,15 @@
 
 Signal Scope reads the statistical residue that language models leave in prose and turns it into an explainable AI-likeness score. It runs entirely in the browser: no API calls, no uploads, no dependencies, no build step. Everything analysed stays on the reader's machine.
 
-This repository contains the model only (`signal-scope.js`). The website interface is not included; its layout and design are copyrighted and reserved.
+This repository contains the model only (`signal-scope.js`). The website interface is not included.
 
 **[Try the live demo](https://kaheichan.neocities.org/detector/)**
 
-> This is an indicator, not proof. Clean, well-organised human writing, and especially writing by non-native English speakers, can score high. A score should start a conversation, never end one.
+⚠️ This is an indicator, not proof. Clean, well-organised human writing, and especially writing by non-native English speakers, can score high. A score should start a conversation, never end one. ⚠️
 
 ## Trained via Claude
 
-The model's weights, thresholds, vocabulary databases, and calibration were developed and tuned end-to-end with **Claude Opus (Anthropic)**. Claude was used to build and iterate the signal definitions, the grading curve, the actionable-fix suggestions, and the large AI-vocabulary and phrase tables that drive the stylistic signal. It is, in effect, a detection model shaped by a frontier language model reasoning about how frontier language models write.
+The model's weights, thresholds, vocabulary databases, and calibration were developed and tuned with **Claude Opus 4.8 (Anthropic)**. Claude was used to build and iterate the signal definitions, the grading curve, the actionable-fix suggestions, and the large AI-vocabulary and phrase tables that drive the stylistic signal. It is, in effect, a detection model shaped by a frontier language model reasoning about how frontier language models write by comparing 80 human written essays with 80 AI generated essays on the same topic. 
 
 ## What the model measures
 
@@ -26,7 +26,7 @@ The final score is a **weighted average of the signals below**, passed through a
 | Token patterns | Recycled function-word templates such as "one reason is". Topic repetition is not penalised. |
 | Semantic cohesion | How evenly topic vocabulary is spread. Flat, driftless texture leans AI; human tangents pull toward human. |
 | Perturbation peak | Swaps synonyms into a sentence; if the original sits in a local probability trough it walked the path of maximum probability. |
-| Grammar and mechanics | Real grammar and spelling errors lean human; em-dash and colon-label habits lean lightly AI. |
+| Grammar and mechanics | Grammar and spelling errors lean human; em-dash and colon-label habits lean lightly AI. |
 
 Every score is fully attributable. The model exposes, per signal, the exact spans of text that drove it, so a host UI can show the reader why any score is what it is.
 
@@ -78,7 +78,7 @@ Each `score*` function returns `{ score, detail, dir, ... }`, where `detail` is 
 
 ## Privacy
 
-The model never transmits text anywhere. All analysis, including file parsing, happens locally in the browser. See the full terms and privacy notice: <https://kaheichan.neocities.org/privacyandterms>
+The model never transmits text anywhere. All analysis, including file parsing, happens locally in the browser.
 
 ## Limitations
 
@@ -86,11 +86,12 @@ The model never transmits text anywhere. All analysis, including file parsing, h
 - Short passages carry little signal; treat scores under about 150 words with lower confidence.
 - Human and AI writing styles are converging, which narrows the gap any detector relies on.
 - The bias against non-native English writers is real and documented. Do not use a score as evidence of misconduct.
+- Plagiarism could not be detected as the model is local and could not compare with information on the web. 
 
 ## License
 
 Model licensed **CC BY-NC-SA 4.0**. You may share and adapt it for non-commercial use with attribution, under the same license.
 
-Copyright 2026 KH. [kaheichan.neocities.org](https://kaheichan.neocities.org)
+2026 KH. [kaheichan.neocities.org](https://kaheichan.neocities.org)
 
 A Shellcraft Service, part of Project Freedom Bell.
